@@ -201,3 +201,5 @@ gradle-app.setting
 *.hprof
 
 # End of https://www.toptal.com/developers/gitignore/api/gradle,macos,windows,intellij
+/src/main/resources/.env
+/src/main/java/main/MainTest.java

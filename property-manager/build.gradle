@@ -17,6 +17,8 @@ dependencies {
     // JUnit Jupiter 의존성
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+    implementation 'io.github.cdimascio:dotenv-java:2.2.0'
+    implementation 'mysql:mysql-connector-java:8.0.30'
 }
 
 test {
