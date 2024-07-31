@@ -26,8 +26,8 @@ public class PropertyManagerImpl implements PropertyManager {
     public List<Property> searchBySoldDate() {
         sql = "select * from property order by sold_date desc ";
         List<Property> resultList = new ArrayList<>();
+        PreparedStatement pstmt = null;
         try {
-            conn = getConnection();
             pstmt = conn.prepareStatement(sql);
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
@@ -51,6 +51,7 @@ public class PropertyManagerImpl implements PropertyManager {
         }
         return resultList;
     }
+    
     @Override
     public void updateSoldDate(int propertyId, String soldDate) {
 
