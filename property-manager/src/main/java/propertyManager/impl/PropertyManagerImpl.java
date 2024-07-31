@@ -106,8 +106,6 @@ public class PropertyManagerImpl implements PropertyManager {
             int result = pstmt.executeUpdate();
             System.out.println("property_id에 해당하는 property가 삭제되었습니다 :" + result);
         } catch(SQLException e) {
-            System.out.println("property_id에 해당하는 property가 삭제되었습니다 :" + result); 
-        } catch(SQLException e) {
             e.printStackTrace();
             throw new RuntimeException(e);
         }

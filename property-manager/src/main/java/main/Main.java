@@ -12,7 +12,7 @@ import java.sql.*;
 import java.util.List;
 
 public class Main {
-    public static void main(String[] args) throws SQLException, IOException {
+    public static void main(String[] args) {
         Dotenv dotenv = Dotenv.load();
         String url = dotenv.get("DB_URL");
         String user = dotenv.get("DB_USER");
@@ -33,6 +33,7 @@ public class Main {
                 System.out.println("\t7. 프로그램 종료하기");
                 BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
                 int type = Integer.parseInt(br.readLine());
+                List<Property> properties;
                 switch (type){
                     case 1:
                         System.out.println("propertyId 입력");
@@ -59,7 +60,7 @@ public class Main {
                         propertyManager.addProperty(propertyAdd);
                         break;
                     case 2:
-                        List<Property> properties = propertyManager.getProperties();
+                        properties = propertyManager.getProperties();
                         for (Property property : properties) {
                             System.out.println(property.toString());
                         }
@@ -67,14 +68,14 @@ public class Main {
                     case 3:
                         break;
                     case 4:
-                        List<Property> properties = propertyManger.searchBySoldDate();
+                        properties = propertyManager.searchBySoldDate();
                         for (Property property : properties) {
                             System.out.println(property.toString());
                         }
                         break;
                     case 6:
                         int pro_id = Integer.parseInt(br.readLine());
-                        deleteProperty(pro_id);
+                        propertyManager.deleteProperty(pro_id);
                         break;
                     case 7:
                         break;
@@ -86,6 +87,8 @@ public class Main {
             }
         }catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 }
