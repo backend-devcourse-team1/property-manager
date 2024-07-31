@@ -9,16 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PropertyManagerImpl implements PropertyManager {
-    private static final Dotenv dotenv = Dotenv.load();
+    Connection conn;
 
-    private static final String URL = dotenv.get("DB_URL");
-    private static final String USER = dotenv.get("DB_USER");
-    private static final String PASSWORD = dotenv.get("DB_PASSWORD");
-
-    private Connection getConnection() throws SQLException {
-        return DriverManager.getConnection(URL, USER, PASSWORD);
+    public PropertyManagerImpl(Connection conn) {
+        this.conn = conn;
     }
-
     @Override
     public void addProperty(Property p) {
 
@@ -28,7 +23,7 @@ public class PropertyManagerImpl implements PropertyManager {
     public List<Property> getProperties() {
         List<Property> properties = new ArrayList<>();
         String sql = "SELECT * FROM property";
-        try (Connection conn = getConnection(); Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(sql)) {
+        try (Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(sql)) {
             while (rs.next()) {
                 Property property = new Property();
                 property.setProperty_id(rs.getInt("property_id"));
