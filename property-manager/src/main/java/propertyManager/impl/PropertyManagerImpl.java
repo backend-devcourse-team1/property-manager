@@ -26,10 +26,10 @@ public class PropertyManagerImpl implements PropertyManager {
     public void addProperty(Property p) {
         String SQL = "insert into property(property_id, paricipant_id, up_date, sold_date, address, width) values(?,?,?,?,?,?)";
         try (PreparedStatement ps = conn.prepareStatement(SQL)) {
-            ps.setInt(1, p.getProperty_id());
-            ps.setInt(2, p.getParticipant_id());
-            ps.setDate(3, (Date) p.getUp_date());
-            ps.setDate(4, (Date) p.getSold_date());
+            ps.setInt(1, p.getPropertyId());
+            ps.setInt(2, p.getParticipantId());
+            ps.setDate(3, (Date) p.getUpDate());
+            ps.setDate(4, (Date) p.getSoldDate());
             ps.setString(5, p.getAddress());
             ps.setInt(6, p.getWidth());
             ps.executeUpdate();
@@ -41,14 +41,14 @@ public class PropertyManagerImpl implements PropertyManager {
     @Override
     public List<Property> getProperties() {
         List<Property> properties = new ArrayList<>();
-        String sql = "SELECT * FROM property";
+        String sql = "SELECT FROM property";
         try (Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(sql)) {
             while (rs.next()) {
                 Property property = new Property();
-                property.setProperty_id(rs.getInt("property_id"));
-                property.setParticipant_id(rs.getInt("participant_id"));
-                property.setUp_date(rs.getDate("up_date"));
-                property.setSold_date(rs.getDate("sold_date"));
+                property.setPropertyId(rs.getInt("property_id"));
+                property.setParticipantId(rs.getInt("participant_id"));
+                property.setUpDate(rs.getDate("up_date"));
+                property.setSoldDate(rs.getDate("sold_date"));
                 property.setAddress(rs.getString("address"));
                 property.setWidth(rs.getInt("width"));
                 properties.add(property);
@@ -66,7 +66,7 @@ public class PropertyManagerImpl implements PropertyManager {
 
     @Override
     public List<Property> searchBySoldDate() {
-        String sql = "select * from property order by sold_date desc ";
+        String sql = "select from property order by sold_date desc ";
         List<Property> resultList = new ArrayList<>();
         PreparedStatement pstmt = null;
         try {
@@ -105,8 +105,8 @@ public class PropertyManagerImpl implements PropertyManager {
         try (PreparedStatement pstmt = conn.prepareStatement(SQL)) {
             pstmt.setInt(1, property_id);
             int result = pstmt.executeUpdate();
-            System.out.println("property_id에 해당하는 property가 삭제되었습니다 :”
-            + result); } catch(SQLException e) {
+            System.out.println("property_id에 해당하는 property가 삭제되었습니다 :" + result);
+        } catch(SQLException e) {
             e.printStackTrace();
             throw new RuntimeException(e);
         }
