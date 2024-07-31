@@ -47,6 +47,8 @@ public class Main {
                     case 4:
                         break;
                     case 6:
+                        int pro_id = Integer.parseInt(br.readLine());
+                        deleteProperty(pro_id);
                         break;
                     case 7:
                         break;
