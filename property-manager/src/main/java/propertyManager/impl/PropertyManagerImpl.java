@@ -2,6 +2,7 @@ package propertyManager.impl;
 
 import entity.Property;
 import propertyManager.PropertyManager;
+import java.sql.*;
 
 import java.sql.Connection;
 import java.sql.Date;
@@ -45,7 +46,32 @@ public class PropertyManagerImpl implements PropertyManager {
 
     @Override
     public List<Property> searchBySoldDate() {
-        return null;
+        sql = "select * from property order by sold_date desc ";
+        List<Property> resultList = new ArrayList<>();
+        PreparedStatement pstmt = null;
+        try {
+            pstmt = conn.prepareStatement(sql);
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                resultList.add(new Property(
+                        rs.getString("participant_id"),
+                        rs.getDate("up_date"),
+                        rs.getDate("sold_date"),
+                        rs.getString("address"),
+                        rs.getInt("width")
+                ));
+            }
+        }catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            try {
+                if (pstmt != null) pstmt.close();
+                if (conn != null) conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return resultList;
     }
 
     @Override
