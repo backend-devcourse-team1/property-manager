@@ -35,6 +35,28 @@ public class Main {
                 int type = Integer.parseInt(br.readLine());
                 switch (type){
                     case 1:
+                        System.out.println("propertyId 입력");
+                        int propertyId = Integer.parseInt(br.readLine());
+                        System.out.println("participantId 입력");
+                        int participantId = Integer.parseInt(br.readLine());
+                        System.out.println("upDate 입력");
+                        Date upDate = Date.valueOf(br.readLine());
+                        System.out.println("soldDate 입력");
+                        Date soldDate = Date.valueOf(br.readLine());
+                        System.out.println("address 입력");
+                        String address = br.readLine();
+                        System.out.println("width 입력");
+                        int width = Integer.parseInt(br.readLine());
+
+                        Property propertyAdd = new Property(
+                                propertyId,
+                                participantId,
+                                upDate,
+                                soldDate,
+                                address,
+                                width
+                        );
+                        propertyManager.addProperty(propertyAdd);
                         break;
                     case 2:
                         List<Property> properties = propertyManager.getProperties();
