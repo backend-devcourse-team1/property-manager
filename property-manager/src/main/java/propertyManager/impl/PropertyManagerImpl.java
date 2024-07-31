@@ -96,7 +96,23 @@ public class PropertyManagerImpl implements PropertyManager {
 
     @Override
     public void updateSoldDate(int propertyId, String soldDate) {
-
+        String SQL = "UPDATE property SET sold_date = ? WHERE property_id = ?";
+        PreparedStatement pstmt = null;
+        try {
+            pstmt = conn.prepareStatement(SQL);
+            int result = pstmt.executeUpdate();
+            System.out.println("SQL 실행 완료");
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        } finally {
+            try{
+                if (pstmt != null) pstmt.close();
+                if (conn != null) conn.close();
+            } catch(SQLException e){
+                e.printStackTrace();
+            }
+        }
     }
 
     @Override public void deleteProperty(int property_id) {
