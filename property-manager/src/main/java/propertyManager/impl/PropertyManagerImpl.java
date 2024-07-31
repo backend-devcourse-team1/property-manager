@@ -31,14 +31,13 @@ public class PropertyManagerImpl implements PropertyManager {
             pstmt = conn.prepareStatement(sql);
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
-                Property property = new Property(
+                resultList.add(new Property(
                         rs.getString("participant_id"),
                         rs.getDate("up_date"),
                         rs.getDate("sold_date"),
                         rs.getString("address"),
                         rs.getInt("width")
-                );
-                resultList.add(property);
+                ));
             }
         }catch (SQLException e) {
             throw new RuntimeException(e);
