@@ -46,7 +46,7 @@ public class PropertyManagerImpl implements PropertyManager {
 
     @Override
     public List<Property> searchBySoldDate() {
-        sql = "select * from property order by sold_date desc ";
+        String sql = "select * from property order by sold_date desc ";
         List<Property> resultList = new ArrayList<>();
         PreparedStatement pstmt = null;
         try {
