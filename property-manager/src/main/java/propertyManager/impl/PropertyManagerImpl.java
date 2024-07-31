@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class PropertyManagerImpl implements PropertyManager {
@@ -73,7 +74,8 @@ public class PropertyManagerImpl implements PropertyManager {
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 resultList.add(new Property(
-                        rs.getString("participant_id"),
+                        rs.getInt("property_id"),
+                        rs.getInt("participant_id"),
                         rs.getDate("up_date"),
                         rs.getDate("sold_date"),
                         rs.getString("address"),

@@ -1,5 +1,6 @@
 package entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -9,7 +10,7 @@ import java.util.Date;
 @Getter
 @Setter
 @ToString
-@Allargsconstructor
+@AllArgsConstructor
 public class Property {
     private int property_id;
     private int participant_id;
@@ -17,4 +18,7 @@ public class Property {
     private Date sold_date;
     private String address;
     private int width;
+
+    public Property() {
+    }
 }
