@@ -45,6 +45,10 @@ public class Main {
                     case 3:
                         break;
                     case 4:
+                        List<Property> properties = propertyManger.searchBySoldDate();
+                        for (Property property : properties) {
+                            System.out.println(property.toString());
+                        }
                         break;
                     case 6:
                         break;
