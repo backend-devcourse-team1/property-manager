@@ -73,7 +73,7 @@ public class PropertyManagerImpl implements PropertyManager {
         }
         return resultList;
     }
-    
+
     @Override
     public void updateSoldDate(int propertyId, String soldDate) {
 
