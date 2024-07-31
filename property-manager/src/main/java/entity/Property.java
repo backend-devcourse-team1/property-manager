@@ -9,6 +9,7 @@ import java.util.Date;
 @Getter
 @Setter
 @ToString
+@Allargsconstructor
 public class Property {
     private int property_id;
     private int participant_id;
