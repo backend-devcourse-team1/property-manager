@@ -66,6 +66,10 @@ public class Main {
                         }
                         break;
                     case 3:
+                        properties = propertyManager.searchByWidth(type);
+                        for (Property property : properties) {
+                            System.out.println(property.toString());
+                        }
                         break;
                     case 4:
                         properties = propertyManager.searchBySoldDate();

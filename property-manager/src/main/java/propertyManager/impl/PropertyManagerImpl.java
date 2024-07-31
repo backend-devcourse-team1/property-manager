@@ -59,8 +59,36 @@ public class PropertyManagerImpl implements PropertyManager {
     }
 
     @Override
-    public List<Property> searchByWidth() {
-        return null;
+    public List<Property> searchByWidth(int width) {
+        String sql = "SELECT * FROM property WHERE width = ?";
+        List<Property> resultList = new ArrayList<>();
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        try {
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, width);
+            rs = pstmt.executeQuery();
+            while (rs.next()) {
+                resultList.add(new Property(
+                        rs.getInt("property_id"),
+                        rs.getInt("participant_id"),
+                        rs.getDate("up_date"),
+                        rs.getDate("sold_date"),
+                        rs.getString("address"),
+                        rs.getInt("width")
+                ));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (pstmt != null) pstmt.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return resultList;
     }
 
     @Override
