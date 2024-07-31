@@ -67,8 +67,14 @@ public class Main {
                     case 3:
                         break;
                     case 4:
+                        List<Property> properties = propertyManger.searchBySoldDate();
+                        for (Property property : properties) {
+                            System.out.println(property.toString());
+                        }
                         break;
                     case 6:
+                        int pro_id = Integer.parseInt(br.readLine());
+                        deleteProperty(pro_id);
                         break;
                     case 7:
                         break;
