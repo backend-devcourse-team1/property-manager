@@ -1,15 +1,9 @@
 package propertyManager.impl;
 
 import entity.Property;
-import io.github.cdimascio.dotenv.Dotenv;
 import propertyManager.PropertyManager;
+
 import java.sql.*;
-
-
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -59,14 +53,11 @@ public class PropertyManagerImpl implements PropertyManager {
     }
 
     @Override
-    public List<Property> searchByWidth(int width) {
-        String sql = "SELECT * FROM property WHERE width = ?";
+    public List<Property> searchByWidth() {
+        String sql = "SELECT FROM property ORDER BY width desc";
         List<Property> resultList = new ArrayList<>();
-        PreparedStatement pstmt = null;
         ResultSet rs = null;
-        try {
-            pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1, width);
+        try (PreparedStatement pstmt = conn.prepareStatement(sql)){
             rs = pstmt.executeQuery();
             while (rs.next()) {
                 resultList.add(new Property(
@@ -83,7 +74,6 @@ public class PropertyManagerImpl implements PropertyManager {
         } finally {
             try {
                 if (rs != null) rs.close();
-                if (pstmt != null) pstmt.close();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -95,9 +85,7 @@ public class PropertyManagerImpl implements PropertyManager {
     public List<Property> searchBySoldDate() {
         String sql = "select from property order by sold_date desc ";
         List<Property> resultList = new ArrayList<>();
-        PreparedStatement pstmt = null;
-        try {
-            pstmt = conn.prepareStatement(sql);
+        try (PreparedStatement pstmt = conn.prepareStatement(sql)){
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 resultList.add(new Property(
@@ -113,7 +101,6 @@ public class PropertyManagerImpl implements PropertyManager {
             throw new RuntimeException(e);
         } finally {
             try {
-                if (pstmt != null) pstmt.close();
                 if (conn != null) conn.close();
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -125,9 +112,7 @@ public class PropertyManagerImpl implements PropertyManager {
     @Override
     public void updateSoldDate(int propertyId, String soldDate) {
         String SQL = "UPDATE property SET sold_date = ? WHERE property_id = ?";
-        PreparedStatement pstmt = null;
-        try {
-            pstmt = conn.prepareStatement(SQL);
+        try (PreparedStatement pstmt = conn.prepareStatement(SQL)){
             int result = pstmt.executeUpdate();
             System.out.println("SQL 실행 완료");
         } catch (SQLException e) {
@@ -135,7 +120,6 @@ public class PropertyManagerImpl implements PropertyManager {
             throw new RuntimeException(e);
         } finally {
             try{
-                if (pstmt != null) pstmt.close();
                 if (conn != null) conn.close();
             } catch(SQLException e){
                 e.printStackTrace();
@@ -155,3 +139,5 @@ public class PropertyManagerImpl implements PropertyManager {
         }
     }
 }
+
+

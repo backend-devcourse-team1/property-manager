@@ -66,7 +66,8 @@ public class Main {
                         }
                         break;
                     case 3:
-                        properties = propertyManager.searchByWidth(type);
+                        properties = propertyManager.searchByWidth();
+
                         for (Property property : properties) {
                             System.out.println(property.toString());
                         }
@@ -77,11 +78,20 @@ public class Main {
                             System.out.println(property.toString());
                         }
                         break;
+                    case 5:
+                        System.out.println("id 입력");
+                        int id = Integer.parseInt(br.readLine());
+                        System.out.println("판매일 입력");
+                        String soldDateIn = br.readLine();
+                        propertyManager.updateSoldDate(id, soldDateIn);
+                        break;
                     case 6:
                         int pro_id = Integer.parseInt(br.readLine());
                         propertyManager.deleteProperty(pro_id);
                         break;
                     case 7:
+                        System.out.println("종료");
+                        System.exit(1);
                         break;
                     default:
                         System.out.println("잘못된 입력입니다.");
