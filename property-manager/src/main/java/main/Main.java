@@ -67,6 +67,7 @@ public class Main {
                         break;
                     case 3:
                         properties = propertyManager.searchByWidth();
+
                         for (Property property : properties) {
                             System.out.println(property.toString());
                         }
